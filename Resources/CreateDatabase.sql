@@ -42,27 +42,27 @@ LOCK TABLES `bank` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `transaction`
+-- Table structure for table `transaktion`
 --
 
-DROP TABLE IF EXISTS `transaction`;
+DROP TABLE IF EXISTS `transaktion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `transaction` (
-  `transaction_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `transaktion` (
+  `transaktion_id` int NOT NULL AUTO_INCREMENT,
   `beløb` int NOT NULL,
   `dato` char(45) NOT NULL,
-  PRIMARY KEY (`transaction_id`)
+  PRIMARY KEY (`transaktion_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `transaction`
+-- Dumping data for table `transaktion`
 --
 
-LOCK TABLES `transaction` WRITE;
-/*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-/*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
+LOCK TABLES `transaktion` WRITE;
+/*!40000 ALTER TABLE `transaktion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transaktion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -77,7 +77,7 @@ CREATE TABLE `kunde` (
   `navn` varchar(45) NOT NULL,
   `by` float NOT NULL,
   PRIMARY KEY (`kunde_id`),
-  UNIQUE KEY `Name_UNIQUE` (`Name`)
+  UNIQUE KEY `Name_UNIQUE` (`navn`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
