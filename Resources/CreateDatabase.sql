@@ -18,13 +18,13 @@ USE `Bank`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `ingredient`
+-- Table structure for table `bank`
 --
 
-DROP TABLE IF EXISTS `Bank`;
+DROP TABLE IF EXISTS `bank`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Bank` (
+CREATE TABLE `bank` (
   `bank_id` int NOT NULL,
   `navn` varchar(45) NOT NULL,
   `by` varchar(45) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `Bank` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ingredient`
+-- Dumping data for table `bank`
 --
 
 LOCK TABLES `bank` WRITE;
@@ -42,7 +42,7 @@ LOCK TABLES `bank` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `order`
+-- Table structure for table `transaction`
 --
 
 DROP TABLE IF EXISTS `transaction`;
@@ -50,14 +50,14 @@ DROP TABLE IF EXISTS `transaction`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transaction` (
   `transaction_id` int NOT NULL AUTO_INCREMENT,
-  `pizzalist_id` int NOT NULL,
-  PRIMARY KEY (`transaction_id`),
-  KEY `fk_OrderList_PizzaList1_idx` (`pizzalist_id`)
+  `beløb` int NOT NULL,
+  `dato` char(45) NOT NULL,
+  PRIMARY KEY (`transaction_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `order`
+-- Dumping data for table `transaction`
 --
 
 LOCK TABLES `transaction` WRITE;
@@ -66,29 +66,52 @@ LOCK TABLES `transaction` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `pizzalist`
+-- Table structure for table `kunde`
 --
 
-DROP TABLE IF EXISTS `pizzalist`;
+DROP TABLE IF EXISTS `kunde`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `pizzalist` (
-  `pizzalist_id` int NOT NULL AUTO_INCREMENT,
-  `Name` varchar(45) NOT NULL,
-  `Price` float NOT NULL,
-  PRIMARY KEY (`pizzalist_id`),
+CREATE TABLE `kunde` (
+  `kunde_id` int NOT NULL AUTO_INCREMENT,
+  `navn` varchar(45) NOT NULL,
+  `by` float NOT NULL,
+  PRIMARY KEY (`kunde_id`),
   UNIQUE KEY `Name_UNIQUE` (`Name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `pizzalist`
+-- Dumping data for table `kunde`
 --
 
-LOCK TABLES `pizzalist` WRITE;
-/*!40000 ALTER TABLE `pizzalist` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pizzalist` ENABLE KEYS */;
+LOCK TABLES `kunde` WRITE;
+/*!40000 ALTER TABLE `kunde` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kunde` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `kunde`
+--
+
+DROP TABLE IF EXISTS `konto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `konto` (
+  `konto_id` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`konto_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `kunde`
+--
+
+LOCK TABLES `konto` WRITE;
+/*!40000 ALTER TABLE `konto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `konto` ENABLE KEYS */;
+UNLOCK TABLES;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
