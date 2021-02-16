@@ -5,7 +5,9 @@ public class Main {
     public static void main(String[] args) {
 
         Customer c1 = new Customer("Jon");
+        Customer c2 = new Customer("Mads");
         Account account = new Account(c1);
+        Account account1 = new Account(c2);
 
 
         int newBalance = 0;
