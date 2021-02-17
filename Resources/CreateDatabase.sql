@@ -77,7 +77,7 @@ CREATE TABLE `kunde` (
   `navn` varchar(45) NOT NULL,
   `by` float NOT NULL,
   PRIMARY KEY (`kunde_id`),
-  UNIQUE KEY `Name_UNIQUE` (`Name`)
+  UNIQUE KEY `Name_UNIQUE` (`navn`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
