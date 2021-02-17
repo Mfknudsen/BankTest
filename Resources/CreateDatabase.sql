@@ -1,8 +1,11 @@
-CREATE DATABASE  IF NOT EXISTS `Bank` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `Bank`;
+DROP DATABASE IF EXISTS `banktest`; 
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE DATABASE  IF NOT EXISTS `banktest` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `banktest`;
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
--- Host: localhost    Database: Bank
+-- Host: localhost    Database: banktest
 -- ------------------------------------------------------
 -- Server version	8.0.22
 
@@ -73,12 +76,11 @@ DROP TABLE IF EXISTS `kunde`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `kunde` (
-  `kunde_id` int NOT NULL AUTO_INCREMENT,
+  `kunde_id` int NOT NULL,
   `navn` varchar(45) NOT NULL,
-  `by` float NOT NULL,
-  PRIMARY KEY (`kunde_id`),
-  UNIQUE KEY `Name_UNIQUE` (`navn`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+  `by` varchar(45) NOT NULL,
+  PRIMARY KEY (`kunde_id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

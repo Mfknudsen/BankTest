@@ -44,9 +44,9 @@ public class SQL_Connection implements AutoCloseable {
 
     public Customer CreateNewCustomer(int id, String name, String city) throws Exception{
         Customer result = new Customer(id, name, city);
-        ps_SetNewCustomer.setInt(1,id);
-        ps_SetNewCustomer.setString(2, name);
-        ps_SetNewCustomer.setString(3, city);
+        ps_SetNewCustomer.setInt(1, id);
+        ps_SetNewCustomer.setString(2, name + "");
+        ps_SetNewCustomer.setString(3, city + "");
         if(ps_SetNewCustomer.executeUpdate() != 1)
             throw new Exception("Could Not Update Customers");
         return result;
@@ -141,19 +141,19 @@ public class SQL_Connection implements AutoCloseable {
         connection = DriverManager.getConnection(url, user, password);
 
         //region Getters
-        ps_GetCustomers = connection.prepareStatement("SELECT * FROM bank.kunde");
-        ps_GetAccounts = connection.prepareStatement("SELECT * FROM bank.konto");
-        ps_GetTransactionByID = connection.prepareStatement("SELECT * FROM bank.transaktion WHERE transaktion_id = ?");
-        ps_GetBanks = connection.prepareStatement("SELECT * FROM bank.bank");
+        ps_GetCustomers = connection.prepareStatement("SELECT * FROM banktest.kunde");
+        ps_GetAccounts = connection.prepareStatement("SELECT * FROM banktest.konto");
+        ps_GetTransactionByID = connection.prepareStatement("SELECT * FROM banktest.transaktion WHERE transaktion_id = ?");
+        ps_GetBanks = connection.prepareStatement("SELECT * FROM banktest.bank");
         //endregion
         //region Setters
-        ps_SetNewCustomer = connection.prepareStatement("INSERT INTO bank.kunde " +
-                "(kunde_id, navn, by) VALUES (?, ?, ?)");
-        ps_SetNewAccount = connection.prepareStatement("INSERT INTO bank.konto " +
+        ps_SetNewCustomer = connection.prepareStatement("INSERT INTO banktest.kunde " +
+                "(kunde_id, navn, `by`) VALUES (?, ?, ?)");
+        ps_SetNewAccount = connection.prepareStatement("INSERT INTO banktest.konto " +
                 "(konto_id) VALUES (?)");
-        ps_SetNewTransaction = connection.prepareStatement("INSERT INTO bank.transaktion " +
+        ps_SetNewTransaction = connection.prepareStatement("INSERT INTO banktest.transaktion " +
                 "(transaktion_id, beløb, dato) VALUES (?, ?, ?)");
-        ps_SetNewBank = connection.prepareStatement("INSERT INTO bank.bank " +
+        ps_SetNewBank = connection.prepareStatement("INSERT INTO banktest.bank " +
                 "(bank_id, navn, by) VALUES (?, ?, ?)");
         //endregion
     }

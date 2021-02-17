@@ -21,7 +21,7 @@ public class Main {
         }
 
         try {
-            Customer c1 = connection.CreateNewCustomer(1, "John", "Lyngby");
+            Customer c1 = connection.CreateNewCustomer(1, "John", "København");
             Customer c2 = connection.CreateNewCustomer(2,"Mads", "Nærum");
             Account account = connection.CreateNewAccount(c1);
             Account account1 = connection.CreateNewAccount(c2);
