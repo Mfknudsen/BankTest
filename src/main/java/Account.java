@@ -3,15 +3,16 @@ import java.util.Date;
 import java.util.List;
 
 public class Account {
+    private List<Transaction> transactions = new ArrayList<>();
+    private Customer customer = null;
+    private int id;
 
-    private List<Transaction> transactions;
-    private Customer customer;
-
-    public Account(Customer customer) {
+    public Account(int id) {
         this.transactions = new ArrayList<>();
-        this.customer = customer;
+        this.id = id;
     }
 
+    //region Getters
     public Customer getCustomer() {
         return customer;
     }
@@ -24,11 +25,22 @@ public class Account {
         return sum;
     }
 
+    public int getId() {
+        return id;
+    }
+    //endregion
+
+    //region Setters
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+    //endregion
+
     public int withDrawAmount(int amount) throws Exception{
         if(amount > getBalance())
             throw new Exception();
 
-        transactions.add(new Transaction(-amount, new Date()));
+        transactions.add(new Transaction(customer.getId() ,-amount, new Date().toString()));
 
         return getBalance();
     }
@@ -36,7 +48,7 @@ public class Account {
     public int depositAmount(int amount) throws Exception{
         if(amount < 0)
             throw new Exception();
-        transactions.add(new Transaction(amount, new Date()));
+        transactions.add(new Transaction(customer.getId() ,amount, new Date().toString()));
 
         return getBalance();
     }

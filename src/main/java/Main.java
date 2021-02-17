@@ -2,14 +2,18 @@ import java.util.List;
 import  java.util.Scanner;
 
 public class Main {
+    private static SQL_Connection connection;
+    private static Scanner scanner;
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        SQL_Connection connection;
+        scanner = new Scanner(System.in);
 
         Customer c1 = new Customer("Jon");
         Customer c2 = new Customer("Mads");
-        Account account = new Account(c1);
-        Account account1 = new Account(c2);
+        Account account = new Account(c1.getId());
+        account.setCustomer(c1);
+        Account account1 = new Account(c2.getId());
+        account1.setCustomer(c2);
 
         try {
             System.out.println("Type In Username:");
