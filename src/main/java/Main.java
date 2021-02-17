@@ -8,12 +8,15 @@ public class Main {
     public static void main(String[] args) {
         scanner = new Scanner(System.in);
 
-        Customer c1 = new Customer("Jon");
-        Customer c2 = new Customer("Mads");
-        Account account = new Account(c1.getId());
-        account.setCustomer(c1);
-        Account account1 = new Account(c2.getId());
-        account1.setCustomer(c2);
+        try {
+            Customer c1 = connection.CreateNewCustomer(1, "John", "Lyngby");
+            Customer c2 = connection.CreateNewCustomer(2,"Mads", "Nærum");
+            Account account = connection.CreateNewAccount(c1);
+            Account account1 = connection.CreateNewAccount(c2);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
 
         try {
             System.out.println("Type In Username:");

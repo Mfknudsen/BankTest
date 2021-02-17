@@ -37,7 +37,8 @@ public class SQL_Connection implements AutoCloseable {
         Account result = new Account(c.getId());
         result.setCustomer(c);
         ps_SetNewAccount.setInt(1, c.getId());
-        ps_SetNewAccount.executeUpdate();
+        if(ps_SetNewAccount.executeUpdate() != 1)
+            throw new Exception("Could Not Update Accounts");
         return result;
     }
 
@@ -46,7 +47,28 @@ public class SQL_Connection implements AutoCloseable {
         ps_SetNewCustomer.setInt(1,id);
         ps_SetNewCustomer.setString(2, name);
         ps_SetNewCustomer.setString(3, city);
-        ps_SetNewCustomer.executeUpdate();
+        if(ps_SetNewCustomer.executeUpdate() != 1)
+            throw new Exception("Could Not Update Customers");
+        return result;
+    }
+
+    public Transaction CreateNewTransaction(int id, int amount, String date) throws Exception{
+        Transaction result = new Transaction(id, amount, date);
+        ps_SetNewTransaction.setInt(1, id);
+        ps_SetNewTransaction.setInt(2, amount);
+        ps_SetNewTransaction.setString(3, date);
+        if(ps_SetNewTransaction.executeUpdate() != 1)
+            throw new Exception("Could Not Update Transactions");
+        return  result;
+    }
+
+    public Bank CreateNewBank(int id, String name, String city) throws Exception{
+        Bank result = new Bank(id, name, city);
+        ps_SetNewBank.setInt(1, id);
+        ps_SetNewBank.setString(2, name);
+        ps_SetNewBank.setString(3, city);
+        if(ps_SetNewBank.executeUpdate() != 1)
+            throw new Exception("Could Not Update Banks");
         return result;
     }
     //endregion

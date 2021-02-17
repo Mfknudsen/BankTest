@@ -1,8 +1,8 @@
 import java.util.Objects;
 
 public class Customer {
-    private String name, city;
-    private int id;
+    private String name = "", city = "";
+    private int id = 0;
 
     public Customer(int id, String name, String city) {
         this.name = name;
