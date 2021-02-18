@@ -1,8 +1,10 @@
-CREATE DATABASE  IF NOT EXISTS `Bank` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `Bank`;
+DROP DATABASE IF EXISTS `bankTest`;
+
+CREATE DATABASE  IF NOT EXISTS `bankTest` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `bankTest`;
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
--- Host: localhost    Database: Bank
+-- Host: localhost    Database: bankTest
 -- ------------------------------------------------------
 -- Server version	8.0.22
 
@@ -75,7 +77,7 @@ DROP TABLE IF EXISTS `kunde`;
 CREATE TABLE `kunde` (
   `kunde_id` int NOT NULL AUTO_INCREMENT,
   `navn` varchar(45) NOT NULL,
-  `by` float NOT NULL,
+  `by` varchar(45) NOT NULL,
   PRIMARY KEY (`kunde_id`),
   UNIQUE KEY `Name_UNIQUE` (`navn`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;

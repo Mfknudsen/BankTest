@@ -13,6 +13,8 @@ public class SQL_Connection implements AutoCloseable {
     private PreparedStatement ps_GetAccounts = null;
     private PreparedStatement ps_GetTransactionByID = null;
     private PreparedStatement ps_GetBanks = null;
+    private PreparedStatement ps_GetCustomer = null;
+    private PreparedStatement ps_GetAccount = null;
     //Setters
     private PreparedStatement ps_SetNewCustomer = null;
     private PreparedStatement ps_SetNewAccount = null;
@@ -135,26 +137,60 @@ public class SQL_Connection implements AutoCloseable {
             throw new Exception(e);
         }
     }
+
+    public Customer FetchCustomerByName(String n) throws Exception{
+        Customer result = null;
+
+        ps_GetCustomer.setString(1, n);
+        try(ResultSet rs = ps_GetCustomer.executeQuery()){
+            while (rs.next()){
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String city = rs.getString(3);
+                result = new Customer(id, name, city);
+            }
+        } catch (Exception e){
+            throw new Exception(e);
+        }
+        return result;
+    }
+
+    public Account FetchAccountByID(Customer c) throws Exception{
+        Account result = null;
+        ps_GetAccount.setInt(1, c.getId());
+        try(ResultSet rs = ps_GetAccount.executeQuery()) {
+            while (rs.next()){
+                result = new Account(rs.getInt(1));
+                result.setCustomer(c);
+            }
+        } catch (Exception e){
+            throw new Exception(e);
+        }
+
+        return result;
+    }
     //endregion
 
     private void prepare() throws SQLException {
         connection = DriverManager.getConnection(url, user, password);
 
         //region Getters
-        ps_GetCustomers = connection.prepareStatement("SELECT * FROM bank.kunde");
-        ps_GetAccounts = connection.prepareStatement("SELECT * FROM bank.konto");
-        ps_GetTransactionByID = connection.prepareStatement("SELECT * FROM bank.transaktion WHERE transaktion_id = ?");
-        ps_GetBanks = connection.prepareStatement("SELECT * FROM bank.bank");
+        ps_GetCustomers = connection.prepareStatement("SELECT * FROM banktest.kunde");
+        ps_GetAccounts = connection.prepareStatement("SELECT * FROM banktest.konto");
+        ps_GetTransactionByID = connection.prepareStatement("SELECT * FROM banktest.transaktion WHERE transaktion_id = ?");
+        ps_GetBanks = connection.prepareStatement("SELECT * FROM banktest.bank");
+        ps_GetCustomer = connection.prepareStatement("SELECT ONE FROM banktest.kunde WHERE name = ?");
+        ps_GetAccount = connection.prepareStatement("SELECT ONE FROM banktest.konto WHERE konto_id");
         //endregion
         //region Setters
-        ps_SetNewCustomer = connection.prepareStatement("INSERT INTO bank.kunde " +
-                "(kunde_id, navn, by) VALUES (?, ?, ?)");
-        ps_SetNewAccount = connection.prepareStatement("INSERT INTO bank.konto " +
+        ps_SetNewCustomer = connection.prepareStatement("INSERT INTO banktest.kunde " +
+                "(kunde_id, navn, `by`) VALUES (?, ?, ?)");
+        ps_SetNewAccount = connection.prepareStatement("INSERT INTO banktest.konto " +
                 "(konto_id) VALUES (?)");
-        ps_SetNewTransaction = connection.prepareStatement("INSERT INTO bank.transaktion " +
+        ps_SetNewTransaction = connection.prepareStatement("INSERT INTO banktest.transaktion " +
                 "(transaktion_id, beløb, dato) VALUES (?, ?, ?)");
-        ps_SetNewBank = connection.prepareStatement("INSERT INTO bank.bank " +
-                "(bank_id, navn, by) VALUES (?, ?, ?)");
+        ps_SetNewBank = connection.prepareStatement("INSERT INTO banktest.bank " +
+                "(bank_id, navn, `by`) VALUES (?, ?, ?)");
         //endregion
     }
 }
